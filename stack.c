@@ -49,6 +49,12 @@ void print_stack(my_stack_t* ptr){
 	}
 }
 
+int peek_s(my_stack_t* ptr){	
+	return *(ptr->top);
+
+
+}
+
 int main()
 {
 	my_stack_t my_stack;
@@ -61,8 +67,10 @@ int main()
 	}
 	//printf("First: %d\n", ptr -> data[0]);
 	//printf("second: %d\n", ptr -> data[1]);
-	print_stack(ptr);	
-	
+	stack_pop(ptr);
+	//print_stack(ptr);	
+	int result = peek_s(ptr);
+	printf("%d\n", result);
 	free( ptr -> data);
 	ptr -> data = NULL;
 	return 0;
