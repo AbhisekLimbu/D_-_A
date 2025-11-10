@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#define LIMIT 10
 
 typedef struct{
 	int* top;
@@ -11,7 +11,7 @@ typedef struct{
 
 }my_stack_t;
 
-void make_v(my_stack_t *ptr, size_t size ){
+void stack_init(my_stack_t *ptr, size_t size ){
 	ptr -> data = (int*) malloc (sizeof(int) * size);
 	if( !ptr -> data ){
 		printf("sterr: memory allocation failed :(");
@@ -25,22 +25,44 @@ void make_v(my_stack_t *ptr, size_t size ){
 }
 
 
-void push(){
-	
+void stack_push(my_stack_t* x, int num){
+	if( (x -> top - x -> bottom) ==  x -> size){
+	printf("stack overflow\n"); exit(1);
+	};
+	*(x -> top++) = num;
+	}
+
+void stack_pop(my_stack_t* x){
+	if( x -> top == x -> bottom){
+	printf("stack under flow \n"); exit(1);
+	};
+	*(x -> top) = 0;
+	--x -> top;
+
+}
+
+void print_stack(my_stack_t* ptr){
+	int *p =  ptr -> bottom;
+	while( p < ptr -> top){
+		printf("%d\n ", *p);
+		p++;
+	}
 }
 
 int main()
 {
 	my_stack_t my_stack;
 	my_stack_t* ptr = &my_stack;
-	make_v(ptr, 2);
-	ptr -> data[0] = 10;
-	ptr -> size = 2;
-	ptr -> data[1] = 4;
-	printf("First: %d\n", ptr -> data[0]);
-	printf("second: %d\n", ptr -> data[1]);
+	stack_init(ptr, LIMIT);
 
-
+	for ( int i = 0; i < LIMIT ; i++){
+		stack_push(ptr, i);
+	
+	}
+	//printf("First: %d\n", ptr -> data[0]);
+	//printf("second: %d\n", ptr -> data[1]);
+	print_stack(ptr);	
+	
 	free( ptr -> data);
 	ptr -> data = NULL;
 	return 0;
