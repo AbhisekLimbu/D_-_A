@@ -45,6 +45,13 @@ void dequeue_t(queue_t* x){
 	x->head--;
 }
 
+void print_q(queue_t* data_m){
+	int* ptr_i = data_m->tail;
+	while(ptr_i < data_m->head){
+		printf("%d\n", *ptr_i++);
+	
+	}
+}
 
 int main(){
 	queue_t my_queue;
@@ -60,10 +67,11 @@ int main(){
 	//	printf("%d\n", *(itr_ptr(i));
 	//
 	//}
-
-
-	printf("%d\n", ptr->d_block[0]);
-	printf("%d\n", ptr->d_block[1]);
+	print_q(ptr);
+	dequeue_t(ptr);
+	dequeue_t(ptr);
+	printf("--------after dequeeing-------\n");
+	print_q(ptr);
 	free(ptr->d_block);
 	return 0;
 }
