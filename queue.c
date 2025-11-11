@@ -31,6 +31,7 @@ void enqueue_t(queue_t* x, int num)
 		exit(1);
 	}
 	*(x->head) = num;
+	x->head++; // has to advance the pointer
 	x->count++;
 
 }
