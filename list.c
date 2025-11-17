@@ -4,13 +4,12 @@
 #define BUFFER_SIZE 3
 
 static size_t count;
-bool is_full(size_t count){
+bool is_full(void){
 	return BUFFER_SIZE <= count;
 }
 
-
 int insert(int* ptr, int num){
-	if (is_full(count)){
+	if (is_full()){
 		printf("Cannot insert more iterms, buffer_size <");
 		exit(1);
 	}
@@ -32,12 +31,42 @@ int get_idx(int* ptr, int num){
 	return -1;
 }
 
+void delete(int* p, int num){
+	int* start = p;
+	int* end = p+count;
+	while( *start != num){
+		start++;
+	}
+	for(int* n_start = start; n_start + 1 < end; n_start++){
+		*n_start = *(n_start+1);
+	}
+	count--;
+}
+
+void print_f(int* x){
+	int* end = x + count;
+	while(x < end){
+		printf("%d\n", *(x));
+		x++;
+	}
+	printf("\n");
+}
+
 int main(){
 	int list[BUFFER_SIZE]; 
 	int* ptr = list; // list decaying into pointer
 	insert(ptr, 10);
 	insert(ptr, 20);
 	insert(ptr, 30);
-	printf("the index of num %d\n", get_idx(ptr, 20));
+	delete(ptr, 20);
+	
+
+	int idx = get_idx(ptr, 20);
+	if(idx == -1){
+		printf("not found");
+	}
+	printf("the index of num 20 is %d\n", idx);
+	print_f(ptr);
+
 	return 0;
 }
