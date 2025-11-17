@@ -52,16 +52,6 @@ void print_f(int* x){
 	printf("\n");
 }
 
-void replace_ele(int* proc, int target, int num){
-	int* end = proc + count;
-	while( proc < end){
-		if( *proc == target){
-			*proc = num;
-		}
-		proc++;
-	}
-}
-
 int main(){
 	int list[BUFFER_SIZE]; 
 	int* ptr = list; // list decaying into pointer
@@ -76,7 +66,7 @@ int main(){
 		printf("not found");
 	}
 	printf("the index of num 20 is %d\n", idx);
-	replace_ele(ptr, 10, 100);
 	print_f(ptr);
+
 	return 0;
 }
