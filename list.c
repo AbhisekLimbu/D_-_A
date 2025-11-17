@@ -52,6 +52,18 @@ void print_f(int* x){
 	printf("\n");
 }
 
+void replace(int* pro, int target, int num){
+	int* end = pro + count;
+	while(pro < end){
+		if(*pro == target){
+			*pro = num;
+			pro++;
+		}
+		pro++;
+	}
+}
+
+
 int main(){
 	int list[BUFFER_SIZE]; 
 	int* ptr = list; // list decaying into pointer
@@ -66,6 +78,7 @@ int main(){
 		printf("not found");
 	}
 	printf("the index of num 20 is %d\n", idx);
+	replace(ptr, 10, 100);
 	print_f(ptr);
 
 	return 0;
