@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#define BUFFER_SIZE 3
+#define BUFFER_SIZE 20
 
 static size_t count;
 bool is_full(void){
@@ -52,6 +52,12 @@ void print_f(int* x){
 	printf("\n");
 }
 
+void fill_list(int* l){
+	for(int i = 0; i < BUFFER_SIZE; i++){
+		l[i]= i;
+	}
+	count = BUFFER_SIZE;
+}
 void replace(int* pro, int target, int num){
 	int* end = pro + count;
 	while(pro < end){
@@ -67,17 +73,12 @@ void replace(int* pro, int target, int num){
 int main(){
 	int list[BUFFER_SIZE]; 
 	int* ptr = list; // list decaying into pointer
-	insert(ptr, 10);
-	insert(ptr, 20);
-	insert(ptr, 30);
-	delete(ptr, 20);
-	
-
-	int idx = get_idx(ptr, 20);
+ 	fill_list(ptr);	
+	int idx = get_idx(ptr, 10);
 	if(idx == -1){
 		printf("not found");
 	}
-	printf("the index of num 20 is %d\n", idx);
+	//printf("the index of num 20 is %d\n", idx);
 	replace(ptr, 10, 100);
 	print_f(ptr);
 
